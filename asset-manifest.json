@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/day-and-night/static/css/main.ffba7f6b.chunk.css",
+    "main.js": "/day-and-night/static/js/main.8845801b.chunk.js",
+    "main.js.map": "/day-and-night/static/js/main.8845801b.chunk.js.map",
+    "runtime-main.js": "/day-and-night/static/js/runtime-main.1349995c.js",
+    "runtime-main.js.map": "/day-and-night/static/js/runtime-main.1349995c.js.map",
+    "static/css/2.220ccb42.chunk.css": "/day-and-night/static/css/2.220ccb42.chunk.css",
+    "static/js/2.19842be7.chunk.js": "/day-and-night/static/js/2.19842be7.chunk.js",
+    "static/js/2.19842be7.chunk.js.map": "/day-and-night/static/js/2.19842be7.chunk.js.map",
+    "index.html": "/day-and-night/index.html",
+    "precache-manifest.5060ac636d9d749815aaf11593c1033c.js": "/day-and-night/precache-manifest.5060ac636d9d749815aaf11593c1033c.js",
+    "service-worker.js": "/day-and-night/service-worker.js",
+    "static/css/2.220ccb42.chunk.css.map": "/day-and-night/static/css/2.220ccb42.chunk.css.map",
+    "static/css/main.ffba7f6b.chunk.css.map": "/day-and-night/static/css/main.ffba7f6b.chunk.css.map",
+    "static/js/2.19842be7.chunk.js.LICENSE.txt": "/day-and-night/static/js/2.19842be7.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1349995c.js",
+    "static/css/2.220ccb42.chunk.css",
+    "static/js/2.19842be7.chunk.js",
+    "static/css/main.ffba7f6b.chunk.css",
+    "static/js/main.8845801b.chunk.js"
+  ]
+}
