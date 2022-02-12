@@ -1,0 +1,18 @@
+.headerTitle {
+    font-family: 'Festive', cursive;
+    color: white !important;
+    font-size: 2rem;
+}
+
+.footer {
+    display:flex;
+    flex-direction: row;
+}
+
+.footerContent {
+    margin: 0.5rem !important
+}
+
+.twitterButton {
+    margin-top: 1rem !important;
+}

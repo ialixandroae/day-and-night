@@ -1,34 +1,33 @@
-# 3D Weather App
+# Day and Night
 
-This WebGIS application provides a digital experience in exploring the world, the cities and the weather condition in real time.
+This WebGIS application provides a digital experience in observing the day and night cones for a specific day and hour.
 
-The user can go to any city and real time weather conditions will be displayed for information purposes.
+Moreover, the user can use a time slider to play an animation for today, yesterday and tomorrow.
 
-Moreover, the sky and the 3D environment will be customized to reflect the real time weather.
+Also, the user can select another day in the past or in the future and observe the day and night cones from certain seasons or moments of the year.
 
-Link: https://ionutalixandroae.com/3d-weather-app/
+Link: https://ionutalixandroae.com/day-and-night/
 
 ## Demo & preview
 
-<img width="1785" alt="Screen Shot 2022-01-27 at 13 59 23" src="https://user-images.githubusercontent.com/18401030/151364278-ed2f08c2-25b0-4f25-8f9f-fec5fceba229.png">
+<img width="1785" alt="Screen Shot 2022-02-12 at 14 46 41" src="https://user-images.githubusercontent.com/18401030/153713895-24f94f33-c418-4365-b6c6-b1de973d46dd.png">
 
 ## Areas and capabilities
 
-### Search a city by name and select it
+### Play the time slider and observe the day and night cones in the last 2 days
 
-<img width="1781" alt="Screen Shot 2022-01-27 at 13 59 38" src="https://user-images.githubusercontent.com/18401030/151364347-3531d74b-b6e6-4b34-b349-d58059058035.png">
+<img width="1784" alt="Screen Shot 2022-02-12 at 14 48 43" src="https://user-images.githubusercontent.com/18401030/153713968-66e21a93-b17a-4aaf-985d-b405a84dfed3.png">
 
-### The 3D scene will automatically zoom to it and the local weather conditions will be updated
+### Select another day, month or year and observe the seasonal changes
 
-<img width="1779" alt="Screen Shot 2022-01-27 at 13 59 52" src="https://user-images.githubusercontent.com/18401030/151364415-96cd6fe0-c134-49c3-a4c5-100865b8ed0d.png">
+<img width="1780" alt="Screen Shot 2022-02-12 at 14 53 35" src="https://user-images.githubusercontent.com/18401030/153714152-393fce1b-9306-4313-a3e2-add94ade4373.png">
+
 
 ## Resources
 
 The following resources have been used to create this application:
 
-- <a target="blank" href="https://www.arcgis.com/home/item.html?id=01d3b850d88e4223a18ddbc6afae9b3a">Munich 3D Mesh CityMapper2 - Source attribution: Captured with Leica CityMapper-2 – processed with SURE by nFrames/Esri; Copyright: 2021 Hexagon / Esri.</a>
+- <a target="blank" href="http://jsfiddle.net/demoive/7SVvu/">Original code for day and night cones calculation</a>
 - <a target="blank" href="https://reactjs.org/">React</a>
 - <a target="blank" href="https://developers.arcgis.com/javascript/">ArcGIS API for JavaScript 4.22</a>
-- <a target="blank" href="https://rapidapi.com/">Rapid API</a>
-- <a target="blank" href="https://openweathermap.org/">Open Weather Map API</a>
 - <a target="blank" href="https://ant.design/">Ant Design</a>

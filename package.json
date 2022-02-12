@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ialixandroae.github.io/3d-weather-app/",
+  "homepage": "https://ialixandroae.github.io/day-and-night/",
   "dependencies": {
     "@arcgis/webpack-plugin": "^4.16.3",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
@@ -20,7 +20,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-loader-spinner": "^3.1.14",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "react-twitter-embed": "^4.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

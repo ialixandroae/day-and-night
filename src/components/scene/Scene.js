@@ -1,105 +1,59 @@
 import React, { useEffect, useRef, useContext, useState } from 'react';
 import { loadModules } from 'esri-loader';
-import { getWeather, getEsriWeather } from '../../helpers/helpers';
+import { generateCones } from '../../helpers/helpers';
 import { store } from '../../store/store';
 
-export const WebSceneView = () => {
+export const SceneView = () => {
   const globalState = useContext(store);
-  const { dispatch } = globalState;
 
   const sceneRef = useRef();
   const [sceneView, setView] = useState(null);
+  let [graphicsLayer, setGraphicsLayer] = useState(null);
 
-  const _searchArea = globalState.state.searchArea;
-  const _baseURL = globalState.state.baseURL;
-  const _apiKey = globalState.state.apiKey;
+  const now = globalState.state.date;
 
   useEffect(() => {
     // lazy load the required ArcGIS API for JavaScript modules and CSS
     async function loadWebScene() {
-      const [WebScene, SceneView, Search, Expand] = await loadModules(
-        [
-          'esri/WebScene',
-          'esri/views/SceneView',
-          'esri/widgets/Search',
-          'esri/widgets/Expand',
-        ],
-        {
-          css: true,
-        }
-      );
-      const scene = new WebScene({
-        portalItem: {
-          // autocasts as new PortalItem()
-          id: '3595a9c3957f4178b3c2215d23563702',
-        },
-      });
+      const [Map, SceneView, GraphicsLayer, Expand, BasemapGallery] =
+        await loadModules(
+          [
+            'esri/Map',
+            'esri/views/SceneView',
+            'esri/layers/GraphicsLayer',
+            'esri/widgets/Expand',
+            'esri/widgets/BasemapGallery',
+          ],
+          {
+            css: true,
+          }
+        );
 
-      const weather = await getWeather(_baseURL, {
-        lat: _searchArea.lat,
-        long: _searchArea.long,
-        apiKey: _apiKey,
-      });
+      graphicsLayer = new GraphicsLayer();
+      await generateCones(now, graphicsLayer, 0.7);
 
-      const esriWeather = getEsriWeather(weather?.weather[0]?.id);
-      // load the map view at the ref's DOM node
+      const map = new Map({
+        basemap: 'satellite',
+      });
+      map.add(graphicsLayer);
+
       const view = new SceneView({
         container: sceneRef.current,
-        map: scene,
-        qualityProfile: 'high',
-        environment: {
-          starsEnabled: true,
-          atmosphereEnabled: true,
-          lighting: {
-            directShadowsEnabled: true,
-            date: 'Mon Apr 06 2022 17:19:18 GMT+0200 (Central European Summer Time)',
-          },
-          atmosphere: {
-            quality: 'high',
-          },
-          weather: esriWeather,
-        },
+        map: map,
       });
 
       setView(view);
+      setGraphicsLayer(graphicsLayer);
 
-      const searchWidget = new Search({
+      let basemapGallery = new BasemapGallery({
         view: view,
-      });
-
-      // Add the search widget to the top right corner of the view
-      view.ui.add(searchWidget, {
-        position: 'top-right',
       });
 
       let expand = new Expand({
         view: view,
-        content:
-          'Munich 3D Mesh CityMapper2 : Source attribution: Captured with Leica CityMapper-2 – processed with SURE by nFrames/Esri; Copyright: 2021 Hexagon / Esri.',
-        expanded: true,
+        content: basemapGallery,
       });
-      view.ui.add(expand, 'bottom-left');
-
-      searchWidget.on('select-result', (data) => {
-        const resultLat = data?.result?.feature?.geometry?.latitude;
-        const resultLong = data?.result?.feature?.geometry?.longitude;
-        let resultName = data?.result?.name;
-
-        dispatch({
-          type: 'SET_SEARCH_AREA',
-          data: {
-            lat: resultLat,
-            long: resultLong,
-            name: resultName,
-          },
-        });
-
-        view.goTo({
-          center: [resultLong, resultLat],
-          tilt: 85,
-          zoom: 15,
-        });
-      });
+      view.ui.add(expand, 'top-right');
 
       return () => {
         if (view) {
@@ -112,35 +66,14 @@ export const WebSceneView = () => {
   }, []);
 
   useEffect(() => {
-    async function fetchWeather() {
-      try {
-        const weather = await getWeather(_baseURL, {
-          lat: _searchArea.lat,
-          long: _searchArea.long,
-          apiKey: _apiKey,
-        });
-        dispatch({ type: 'SET_DATA', data: [weather] });
-      } catch (e) {
-        console.log(e);
+    if (sceneView) {
+      graphicsLayer.removeAll();
+      async function recreateCones() {
+        await generateCones(globalState.state.date, graphicsLayer, 0.7);
       }
+      recreateCones();
     }
-    fetchWeather();
-  }, [globalState.state.searchArea]);
-
-  useEffect(() => {
-    if (globalState.state.data.length > 0) {
-      const weather = getEsriWeather(globalState.state.data[0].weather[0].id);
-
-      dispatch({
-        type: 'SET_WEATHER',
-        data: weather,
-      });
-
-      if (sceneView?.environment) {
-        sceneView.environment.weather = weather;
-      }
-    }
-  }, [globalState.state.data]);
+  }, [globalState.state.date]);
 
   return <div style={{ height: '100%', width: '100%' }} ref={sceneRef} />;
 };
